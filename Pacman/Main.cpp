@@ -22,6 +22,8 @@ int main()
 
 	sf::Clock frameClock;
 
+	int characterPoints = 0;
+
 	while (window.isOpen())
 	{
 		sf::Time frameTime = frameClock.restart();
@@ -55,6 +57,12 @@ int main()
 		
 		// Show everything we just drew
 		window.display();
+
+		int points = level.CollectPickup(character.GetSprite());
+		characterPoints += points;
+
+		if(points > 0)
+			std::cout << "Points: " << characterPoints;
 
 		//Check collision
 		bool collided = level.CheckCollision(character.GetSprite(), character.GetDirection());

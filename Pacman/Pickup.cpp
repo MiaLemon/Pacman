@@ -14,6 +14,7 @@ Pickup::Pickup(sf::Texture * texture, sf::IntRect textureBounds, sf::Vector2f po
 	sprite.setPosition(position);
 
 	points = pointsIn;
+	isPickedUp = false;
 }
 
 Pickup::~Pickup()
@@ -22,7 +23,8 @@ Pickup::~Pickup()
 
 void Pickup::Draw(sf::RenderWindow & window)
 {
-	window.draw(sprite);
+	if (!isPickedUp)
+		window.draw(sprite);
 }
 
 int Pickup::PickupPoints()
@@ -33,4 +35,14 @@ int Pickup::PickupPoints()
 bool Pickup::Intersects(sf::Rect<float> rect)
 {
 	return sprite.getGlobalBounds().intersects(rect);
+}
+
+void Pickup::PickupPickup()
+{
+	isPickedUp = true;
+}
+
+bool Pickup::IsPickedUp()
+{
+	return isPickedUp;
 }

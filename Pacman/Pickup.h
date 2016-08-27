@@ -13,9 +13,12 @@ public:
 
 	int PickupPoints();
 	bool Intersects(sf::Rect<float> rect);
+	void PickupPickup();
+	bool IsPickedUp();
 
 private:
 	sf::Sprite sprite;
 	int points;
+	bool isPickedUp = true;
 };
 
