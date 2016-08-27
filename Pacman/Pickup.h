@@ -20,5 +20,7 @@ private:
 	sf::Sprite sprite;
 	int points;
 	bool isPickedUp = true;
+
+	sf::Rect<float> rect;
 };
 

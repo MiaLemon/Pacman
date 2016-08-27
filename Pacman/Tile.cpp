@@ -13,6 +13,8 @@ Tile::Tile(sf::Vector2f position, sf::Texture * texture, TileType type)
 	sprite.setPosition(position);
 
 	SetTileType(type);
+
+	rect = sprite.getGlobalBounds();
 }
 
 Tile::~Tile()
@@ -24,21 +26,20 @@ void Tile::Draw(sf::RenderWindow & window)
 	window.draw(sprite);
 }
 
-bool Tile::Intersects(sf::Rect<float> rect)
+bool Tile::Intersects(sf::Rect<float> rectIn)
 {
-	return rect.intersects(sprite.getGlobalBounds());
+	return rect.intersects(rectIn);
 }
 
 bool Tile::CanTraverse(sf::Vector2f direction, sf::Vector2f position)
 {
-	sf::Rect<float> rectTile = sprite.getGlobalBounds();
-	if (direction.x == 1 && right == 1 && position.x > rectTile.left + 28)//going right
+	if (direction.x == 1 && right == 1 && position.x > rect.left + 28)//going right
 		return false;
-	else if (direction.x == -1 && left == 1 && position.x < rectTile.left + 28)//going left
+	else if (direction.x == -1 && left == 1 && position.x < rect.left + 28)//going left
 		return false;
-	else if (direction.y == -1 && top == 1 && position.y < rectTile.top + 28) //going up
+	else if (direction.y == -1 && top == 1 && position.y < rect.top + 28) //going up
 		return false;
-	else if (direction.y == 1 && bottom == 1 && position.y > rectTile.top + 28) //going down
+	else if (direction.y == 1 && bottom == 1 && position.y > rect.top + 28) //going down
 		return false;
 	else
 		return true;

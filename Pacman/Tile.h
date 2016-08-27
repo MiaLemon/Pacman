@@ -34,6 +34,7 @@ public:
 
 private:
 	sf::Sprite sprite;
+	sf::Rect<float> rect;
 	int top;
 	int bottom;
 	int left;

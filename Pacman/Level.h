@@ -17,6 +17,8 @@ public:
 
 	int CollectPickup(AnimatedSprite object);
 
+	bool LevelCompleted();
+
 private:
 	sf::Texture * texture;
 
@@ -25,6 +27,8 @@ private:
 
 	const static int PICKUPSSIZE = 183;
 	Pickup pickups[PICKUPSSIZE];
+
+	int pickupsPickedup;
 
 	void AddPickUpsToPath2(int x, int y, int * pickupIndex, sf::Texture * texture);
 	void AddPickUpsToPath1(int x, int y, int * pickupIndex, sf::Texture * texture);

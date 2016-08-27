@@ -4,6 +4,8 @@
 
 Level::Level()
 {
+	pickupsPickedup = 0;
+
 	texture = new sf::Texture();
 	if (!texture->loadFromFile("Textures/spriteAtlas.png"))
 	{
@@ -73,7 +75,9 @@ Level::Level()
 	int pickupIndex = 0;
 	int * pPickupIndex = &pickupIndex;
 
-	float x = 0, y = 0;
+	int yStartValue = 50;
+	int xStartValue = 50;
+	float x = xStartValue, y = yStartValue;
 	tiles[0] = Tile(sf::Vector2f(x, y), corner1, Tile::TileType::Corner1);
 	AddPickUpsToCorner1(x, y, pPickupIndex, texture);
 	y += 64;
@@ -104,32 +108,27 @@ Level::Level()
 	AddPickUpsToCorner4(x, y, pPickupIndex, texture);
 
 	x += 64;
-	y = 0;
+	y = yStartValue;
 	tiles[11] = Tile(sf::Vector2f(x, y), path2, Tile::TileType::Path2);
 	AddPickUpsToPath2(x, y, pPickupIndex, texture);
-
 	y += 64;
 	tiles[12] = Tile(sf::Vector2f(x, y), intercross, Tile::TileType::Intercross);
 	y += 64;
 	tiles[13] = Tile(sf::Vector2f(x, y), path2, Tile::TileType::Path2);
 	AddPickUpsToPath2(x, y, pPickupIndex, texture);
-
 	y += 64;
 	tiles[14] = Tile(sf::Vector2f(x, y), path2, Tile::TileType::Path2);
 	AddPickUpsToPath2(x, y, pPickupIndex, texture);
-
 	y += 64;
 	tiles[15] = Tile(sf::Vector2f(x, y), deadend2, Tile::TileType::Deadend2);
 	y += 64;
 	tiles[16] = Tile(sf::Vector2f(x, y), path2, Tile::TileType::Path2);
 	AddPickUpsToPath2(x, y, pPickupIndex, texture);
-
 	y += 64;
 	tiles[17] = Tile(sf::Vector2f(x, y), deadend2, Tile::TileType::Deadend2);
 	y += 64;
 	tiles[18] = Tile(sf::Vector2f(x, y), path2, Tile::TileType::Path2);
 	AddPickUpsToPath2(x, y, pPickupIndex, texture);
-
 	y += 64;
 	tiles[19] = Tile(sf::Vector2f(x, y), corner2, Tile::TileType::Corner2);
 	AddPickUpsToCorner2(x, y, pPickupIndex, texture);
@@ -140,7 +139,7 @@ Level::Level()
 	AddPickUpsToPath2(x, y, pPickupIndex, texture);
 
 	x += 64;
-	y = 0;
+	y = yStartValue;
 	tiles[22] = Tile(sf::Vector2f(x, y), threeway1, Tile::TileType::Threeway1);
 	y += 64;
 	tiles[23] = Tile(sf::Vector2f(x, y), path1, Tile::TileType::Path1);
@@ -168,10 +167,9 @@ Level::Level()
 	AddPickUpsToPath2(x, y, pPickupIndex, texture);
 
 	x += 64;
-	y = 0;
+	y = yStartValue;
 	tiles[33] = Tile(sf::Vector2f(x, y), path2, Tile::TileType::Path2);
 	AddPickUpsToPath2(x, y, pPickupIndex, texture);
-
 	y += 64;
 	tiles[34] = Tile(sf::Vector2f(x, y), intercross, Tile::TileType::Intercross);
 	y += 64;
@@ -198,7 +196,7 @@ Level::Level()
 	AddPickUpsToPath2(x, y, pPickupIndex, texture);
 
 	x += 64;
-	y = 0;
+	y = yStartValue;
 	tiles[44] = Tile(sf::Vector2f(x, y), corner2, Tile::TileType::Corner2);
 	AddPickUpsToCorner2(x, y, pPickupIndex, texture);
 	y += 64;
@@ -217,7 +215,6 @@ Level::Level()
 	y += 64;
 	tiles[50] = Tile(sf::Vector2f(x, y), path2, Tile::TileType::Path2);
 	AddPickUpsToPath2(x, y, pPickupIndex, texture);
-
 	y += 64;
 	tiles[51] = Tile(sf::Vector2f(x, y), corner2, Tile::TileType::Corner2);
 	AddPickUpsToCorner2(x, y, pPickupIndex, texture);
@@ -230,7 +227,7 @@ Level::Level()
 	tiles[54] = Tile(sf::Vector2f(x, y), threeway3, Tile::TileType::Threeway3);
 
 	x += 64;
-	y = 0;
+	y = yStartValue;
 	tiles[55] = Tile(sf::Vector2f(x, y), corner1, Tile::TileType::Corner1);
 	AddPickUpsToCorner1(x, y, pPickupIndex, texture);
 	y += 64;
@@ -249,7 +246,6 @@ Level::Level()
 	y += 64;
 	tiles[61] = Tile(sf::Vector2f(x, y), path2, Tile::TileType::Path2);
 	AddPickUpsToPath2(x, y, pPickupIndex, texture);
-
 	y += 64;
 	tiles[62] = Tile(sf::Vector2f(x, y), corner1, Tile::TileType::Corner1);
 	AddPickUpsToCorner1(x, y, pPickupIndex, texture);
@@ -262,10 +258,9 @@ Level::Level()
 	tiles[65] = Tile(sf::Vector2f(x, y), threeway3, Tile::TileType::Threeway3);
 
 	x += 64;
-	y = 0;
+	y = yStartValue;
 	tiles[66] = Tile(sf::Vector2f(x, y), path2, Tile::TileType::Path2);
 	AddPickUpsToPath2(x, y, pPickupIndex, texture);
-
 	y += 64;
 	tiles[67] = Tile(sf::Vector2f(x, y), intercross, Tile::TileType::Intercross);
 	y += 64;
@@ -292,7 +287,7 @@ Level::Level()
 	AddPickUpsToPath2(x, y, pPickupIndex, texture);
 
 	x += 64;
-	y = 0;
+	y = yStartValue;
 	tiles[77] = Tile(sf::Vector2f(x, y), threeway1, Tile::TileType::Threeway1);
 	y += 64;
 	tiles[78] = Tile(sf::Vector2f(x, y), path1, Tile::TileType::Path1);
@@ -320,32 +315,27 @@ Level::Level()
 	AddPickUpsToPath2(x, y, pPickupIndex, texture);
 
 	x += 64;
-	y = 0;
+	y = yStartValue;
 	tiles[88] = Tile(sf::Vector2f(x, y), path2, Tile::TileType::Path2);
 	AddPickUpsToPath2(x, y, pPickupIndex, texture);
-
 	y += 64;
 	tiles[89] = Tile(sf::Vector2f(x, y), intercross, Tile::TileType::Intercross);
 	y += 64;
 	tiles[90] = Tile(sf::Vector2f(x, y), path2, Tile::TileType::Path2);
 	AddPickUpsToPath2(x, y, pPickupIndex, texture);
-
 	y += 64;
 	tiles[91] = Tile(sf::Vector2f(x, y), path2, Tile::TileType::Path2);
 	AddPickUpsToPath2(x, y, pPickupIndex, texture);
-
 	y += 64;
 	tiles[92] = Tile(sf::Vector2f(x, y), deadend4, Tile::TileType::Deadend4);
 	y += 64;
 	tiles[93] = Tile(sf::Vector2f(x, y), path2, Tile::TileType::Path2);
 	AddPickUpsToPath2(x, y, pPickupIndex, texture);
-
 	y += 64;
 	tiles[94] = Tile(sf::Vector2f(x, y), deadend4, Tile::TileType::Deadend4);
 	y += 64;
 	tiles[95] = Tile(sf::Vector2f(x, y), path2, Tile::TileType::Path2);
 	AddPickUpsToPath2(x, y, pPickupIndex, texture);
-
 	y += 64;
 	tiles[96] = Tile(sf::Vector2f(x, y), corner1, Tile::TileType::Corner1);
 	AddPickUpsToCorner1(x, y, pPickupIndex, texture);
@@ -356,7 +346,7 @@ Level::Level()
 	AddPickUpsToPath2(x, y, pPickupIndex, texture);
 
 	x += 64;
-	y = 0;
+	y = yStartValue;
 	tiles[99] = Tile(sf::Vector2f(x, y), corner2, Tile::TileType::Corner2);
 	AddPickUpsToCorner2(x, y, pPickupIndex, texture);
 	y += 64;
@@ -407,11 +397,13 @@ void Level::Draw(sf::RenderWindow & window)
 
 bool Level::CheckCollision(AnimatedSprite object, sf::Vector2f direction)
 {
+	sf::Rect<float> rectObject = object.getGlobalBounds();
+	sf::Vector2f rectPosition = object.getPosition();
 	//find tile
 	for (int i = 0; i < LEVELSIZE; i++)
 	{
-		if (tiles[i].Intersects(object.getGlobalBounds()) &&
-			!tiles[i].CanTraverse(direction, object.getPosition()))
+		if (tiles[i].Intersects(rectObject) &&
+			!tiles[i].CanTraverse(direction, rectPosition))
 		{
 			return true;
 		}
@@ -422,18 +414,25 @@ bool Level::CheckCollision(AnimatedSprite object, sf::Vector2f direction)
 
 int Level::CollectPickup(AnimatedSprite object)
 {
+	sf::Rect<float> rectObject = object.getGlobalBounds();
 	for (int i = 0; i < PICKUPSSIZE; i++)
 	{
-		if (pickups[i].Intersects(object.getGlobalBounds()) && !pickups[i].IsPickedUp())
+		if (pickups[i].Intersects(rectObject) && !pickups[i].IsPickedUp())
 		{
 			int points = pickups[i].PickupPoints();
 			pickups[i].PickupPickup();
+			pickupsPickedup++;
 
 			return points;
 		}
 	}
 
 	return 0;
+}
+
+bool Level::LevelCompleted()
+{
+	return pickupsPickedup == PICKUPSSIZE;
 }
 
 void Level::AddPickUpsToPath2(int x, int y, int * pickupIndex, sf::Texture * texture)

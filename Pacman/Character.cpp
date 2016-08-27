@@ -52,7 +52,7 @@ Character::Character()
 	float height = rect.height;
 	sprite.setOrigin(width / 2.f, height / 2.f);
 	//sprite.setScale(1.f, 1.f);
-	sprite.setPosition(32, 352);
+	sprite.setPosition(82, 402);
 }
 
 Character::~Character()

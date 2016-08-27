@@ -8,6 +8,7 @@
 #include <iostream>
 #include "Character.h"
 #include "Level.h"
+#include "HUD.h"
 
 // This is the main C++ program- Duh!
 // It is where our game starts from
@@ -17,8 +18,9 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(800, 800), "Pacman");
 
 	Level level = Level();
-
 	Character character = Character();
+
+	HUD hud = HUD();
 
 	sf::Clock frameClock;
 
@@ -35,7 +37,7 @@ int main()
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
-			if(event.type == sf::Event::KeyPressed)
+			if (event.type == sf::Event::KeyPressed)
 			{
 				if (event.key.code == sf::Keyboard::W || event.key.code == sf::Keyboard::Up)
 					character.ChangeDirectionUp();
@@ -54,15 +56,24 @@ int main()
 		// Draw our game scene here
 		level.Draw(window);
 		character.Draw(window);
-		
+		hud.Draw(window);
+
+
 		// Show everything we just drew
 		window.display();
 
 		int points = level.CollectPickup(character.GetSprite());
 		characterPoints += points;
 
-		if(points > 0)
-			std::cout << "Points: " << characterPoints;
+		if (points > 0)
+		{
+			hud.Update(characterPoints);
+		}
+
+		if (level.LevelCompleted())
+		{
+			std::cout << "LEVEL COMPLETED";
+		}
 
 		//Check collision
 		bool collided = level.CheckCollision(character.GetSprite(), character.GetDirection());

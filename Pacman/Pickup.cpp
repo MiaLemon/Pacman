@@ -15,6 +15,8 @@ Pickup::Pickup(sf::Texture * texture, sf::IntRect textureBounds, sf::Vector2f po
 
 	points = pointsIn;
 	isPickedUp = false;
+
+	rect = sprite.getGlobalBounds();
 }
 
 Pickup::~Pickup()
@@ -32,9 +34,9 @@ int Pickup::PickupPoints()
 	return points;
 }
 
-bool Pickup::Intersects(sf::Rect<float> rect)
+bool Pickup::Intersects(sf::Rect<float> rectIn)
 {
-	return sprite.getGlobalBounds().intersects(rect);
+	return rect.intersects(rectIn);
 }
 
 void Pickup::PickupPickup()
