@@ -5,6 +5,7 @@
 
 #include "Pickup.h"
 #include "AnimatedSprite.h"
+#include "Tile.h"
 
 class Level
 {
@@ -22,13 +23,29 @@ public:
 private:
 	sf::Texture * texture;
 
-	const static int LEVELSIZE = 110;
-	Tile tiles[LEVELSIZE];
+	const int LEVELSIZE = 110;
+	Tile * pTiles;
 
-	const static int PICKUPSSIZE = 183;
-	Pickup pickups[PICKUPSSIZE];
+	const int PICKUPSSIZE = 180;
+	Pickup * pPickups;
 
 	int pickupsPickedup;
+
+	sf::Texture * deadend1;
+	sf::Texture * deadend2;
+	sf::Texture * deadend3;
+	sf::Texture * deadend4;
+	sf::Texture * corner1;
+	sf::Texture * corner2;
+	sf::Texture * corner3;
+	sf::Texture * corner4;
+	sf::Texture * path1;
+	sf::Texture * path2;
+	sf::Texture * threeway1;
+	sf::Texture * threeway2;
+	sf::Texture * threeway3;
+	sf::Texture * threeway4;
+	sf::Texture * intercross;
 
 	void AddPickUpsToPath2(int x, int y, int * pickupIndex, sf::Texture * texture);
 	void AddPickUpsToPath1(int x, int y, int * pickupIndex, sf::Texture * texture);
@@ -42,5 +59,7 @@ private:
 	void AddPickUpsToThreeway2(int x, int y, int * pickupIndex, sf::Texture * texture);
 	void AddPickUpsToThreeway3(int x, int y, int * pickupIndex, sf::Texture * texture);
 	void AddPickUpsToThreeway4(int x, int y, int * pickupIndex, sf::Texture * texture);
+
+	void CreateLevelTile(Tile::TileType tile, int * x, int * y, int * tileIndex, int * pickupIndex);
 };
 

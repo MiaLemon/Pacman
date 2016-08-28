@@ -7,21 +7,65 @@ class Tile
 public:
 	enum TileType
 	{
-		Deadend1,
-		Deadend2,
-		Deadend3,
-		Deadend4,
-		Path1,
-		Path2,
-		Corner1,
-		Corner2,
-		Corner3,
-		Corner4,
-		Threeway1,
-		Threeway2,
-		Threeway3,
-		Threeway4,
-		Intercross
+		              //* * *
+		Deadend1 = 0, //*   *
+					  //*   *
+
+					  //* * *
+		Deadend2 = 1, //    *
+					  //* * *
+
+					  //*   *
+		Deadend3 = 2, //*   *
+					  //* * *
+
+					  //* * *
+		Deadend4 = 3, //*   
+					  //* * *
+
+					  //*   *
+		Path1 = 4,    //*   *
+					  //*   *
+
+					  //* * *
+		Path2 = 5,	  //
+					  //* * *
+
+					  //* * *
+		Corner1 = 6,  //*  
+					  //*
+
+					  //* * *
+		Corner2 = 7,  //    *
+					  //    *
+
+					  //    *
+		Corner3 = 8,  //    *
+					  //* * *
+
+					  //*   
+		Corner4 = 9,  //*   
+					  //* * *
+
+					  //* * *
+		Threeway1 =10,//   
+					  //
+
+					  //    *
+		Threeway2 =11,//    *
+					  //    *
+
+					  //
+		Threeway3 =12,//   
+					  //* * *
+
+					  //*   
+		Threeway4 =13,//*   
+					  //*   
+
+					  //
+		Intercross =14//
+					  //
 	};
 
 	Tile();
