@@ -11,6 +11,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <cstdint>
 
 using namespace std;
 class Level
@@ -27,16 +28,14 @@ public:
 	bool LevelCompleted();
 
 private:
-	sf::Texture texture;
-
 	int LEVELSIZE;
-	Tile * pTiles;
-
 	int PICKUPSSIZE;
-	Pickup * pPickups;
+	vector<Tile> tiles;
+	vector<Pickup> pickups;
 
 	int pickupsPickedup;
 
+	sf::Texture texture;
 	sf::Texture deadend1;
 	sf::Texture deadend2;
 	sf::Texture deadend3;
@@ -53,21 +52,21 @@ private:
 	sf::Texture threeway4;
 	sf::Texture intercross;
 
-	int AddPickUpsToPath2(int x, int y, int pickupIndex);
-	int AddPickUpsToPath1(int x, int y, int pickupIndex);
+	int AddPickUpsToPath2(float x, float y, int pickupIndex);
+	int AddPickUpsToPath1(float x, float y, int pickupIndex);
 
-	int AddPickUpsToCorner1(int x, int y, int pickupIndex);
-	int AddPickUpsToCorner2(int x, int y, int pickupIndex);
-	int AddPickUpsToCorner3(int x, int y, int pickupIndex);
-	int AddPickUpsToCorner4(int x, int y, int pickupIndex);
+	int AddPickUpsToCorner1(float x, float y, int pickupIndex);
+	int AddPickUpsToCorner2(float x, float y, int pickupIndex);
+	int AddPickUpsToCorner3(float x, float y, int pickupIndex);
+	int AddPickUpsToCorner4(float x, float y, int pickupIndex);
 
-	int AddPickUpsToThreeway1(int x, int y, int pickupIndex);
-	int AddPickUpsToThreeway2(int x, int y, int pickupIndex);
-	int AddPickUpsToThreeway3(int x, int y, int pickupIndex);
-	int AddPickUpsToThreeway4(int x, int y, int pickupIndex);
+	int AddPickUpsToThreeway1(float x, float y, int pickupIndex);
+	int AddPickUpsToThreeway2(float x, float y, int pickupIndex);
+	int AddPickUpsToThreeway3(float x, float y, int pickupIndex);
+	int AddPickUpsToThreeway4(float x, float y, int pickupIndex);
 
-	void CreateLevelTile(Tile::TileType tileType, int x, int y, int tileIndex);
-	int CreatePickupsForTile(Tile::TileType tileType, int x, int y, int pickupIndex);
+	void CreateLevelTile(Tile::TileType tileType, float x, float y, int tileIndex);
+	int CreatePickupsForTile(Tile::TileType tileType, float x, float y, int pickupIndex);
 
 	void Split(const string &s, char delim, vector<string> &elems);
 	vector<string> Split(const string &s, char delim);
