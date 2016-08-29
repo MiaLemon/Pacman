@@ -6,9 +6,9 @@ Tile::Tile()
 {
 }
 
-Tile::Tile(sf::Vector2f position, sf::Texture * texture, TileType type)
+Tile::Tile(sf::Vector2f position, sf::Texture & texture, TileType type)
 {
-	sprite.setTexture(*texture);
+	sprite.setTexture(texture);
 	sprite.setScale(2, 2);
 	sprite.setPosition(position);
 

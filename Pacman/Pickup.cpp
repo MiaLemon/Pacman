@@ -6,9 +6,9 @@ Pickup::Pickup()
 {
 }
 
-Pickup::Pickup(sf::Texture * texture, sf::IntRect textureBounds, sf::Vector2f position, int pointsIn)
+Pickup::Pickup(sf::Texture & texture, sf::IntRect textureBounds, sf::Vector2f position, int pointsIn)
 {
-	sprite.setTexture(*texture);
+	sprite.setTexture(texture);
 	sprite.setTextureRect(textureBounds);
 	sprite.setScale(2, 2);
 	sprite.setPosition(position);

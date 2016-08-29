@@ -69,7 +69,7 @@ public:
 	};
 
 	Tile();
-	Tile(sf::Vector2f position, sf::Texture * texture, TileType type);
+	Tile(sf::Vector2f position, sf::Texture & texture, TileType type);
 	~Tile();
 
 	void Draw(sf::RenderWindow & window);

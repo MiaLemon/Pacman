@@ -27,7 +27,7 @@ public:
 	bool LevelCompleted();
 
 private:
-	sf::Texture * texture;
+	sf::Texture texture;
 
 	int LEVELSIZE;
 	Tile * pTiles;
@@ -37,34 +37,34 @@ private:
 
 	int pickupsPickedup;
 
-	sf::Texture * deadend1;
-	sf::Texture * deadend2;
-	sf::Texture * deadend3;
-	sf::Texture * deadend4;
-	sf::Texture * corner1;
-	sf::Texture * corner2;
-	sf::Texture * corner3;
-	sf::Texture * corner4;
-	sf::Texture * path1;
-	sf::Texture * path2;
-	sf::Texture * threeway1;
-	sf::Texture * threeway2;
-	sf::Texture * threeway3;
-	sf::Texture * threeway4;
-	sf::Texture * intercross;
+	sf::Texture deadend1;
+	sf::Texture deadend2;
+	sf::Texture deadend3;
+	sf::Texture deadend4;
+	sf::Texture corner1;
+	sf::Texture corner2;
+	sf::Texture corner3;
+	sf::Texture corner4;
+	sf::Texture path1;
+	sf::Texture path2;
+	sf::Texture threeway1;
+	sf::Texture threeway2;
+	sf::Texture threeway3;
+	sf::Texture threeway4;
+	sf::Texture intercross;
 
-	int AddPickUpsToPath2(int x, int y, int pickupIndex, sf::Texture * texture);
-	int AddPickUpsToPath1(int x, int y, int pickupIndex, sf::Texture * texture);
+	int AddPickUpsToPath2(int x, int y, int pickupIndex);
+	int AddPickUpsToPath1(int x, int y, int pickupIndex);
 
-	int AddPickUpsToCorner1(int x, int y, int pickupIndex, sf::Texture * texture);
-	int AddPickUpsToCorner2(int x, int y, int pickupIndex, sf::Texture * texture);
-	int AddPickUpsToCorner3(int x, int y, int pickupIndex, sf::Texture * texture);
-	int AddPickUpsToCorner4(int x, int y, int pickupIndex, sf::Texture * texture);
+	int AddPickUpsToCorner1(int x, int y, int pickupIndex);
+	int AddPickUpsToCorner2(int x, int y, int pickupIndex);
+	int AddPickUpsToCorner3(int x, int y, int pickupIndex);
+	int AddPickUpsToCorner4(int x, int y, int pickupIndex);
 
-	int AddPickUpsToThreeway1(int x, int y, int pickupIndex, sf::Texture * texture);
-	int AddPickUpsToThreeway2(int x, int y, int pickupIndex, sf::Texture * texture);
-	int AddPickUpsToThreeway3(int x, int y, int pickupIndex, sf::Texture * texture);
-	int AddPickUpsToThreeway4(int x, int y, int pickupIndex, sf::Texture * texture);
+	int AddPickUpsToThreeway1(int x, int y, int pickupIndex);
+	int AddPickUpsToThreeway2(int x, int y, int pickupIndex);
+	int AddPickUpsToThreeway3(int x, int y, int pickupIndex);
+	int AddPickUpsToThreeway4(int x, int y, int pickupIndex);
 
 	void CreateLevelTile(Tile::TileType tileType, int x, int y, int tileIndex);
 	int CreatePickupsForTile(Tile::TileType tileType, int x, int y, int pickupIndex);

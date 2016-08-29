@@ -6,7 +6,7 @@ class Pickup
 {
 public:
 	Pickup();
-	Pickup(sf::Texture * texture, sf::IntRect textureBounds, sf::Vector2f position, int pointsIn);
+	Pickup(sf::Texture & texture, sf::IntRect textureBounds, sf::Vector2f position, int pointsIn);
 	~Pickup();
 
 	void Draw(sf::RenderWindow & window);

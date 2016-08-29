@@ -6,70 +6,69 @@ Level::Level()
 {
 	pickupsPickedup = 0;
 
-	texture = new sf::Texture();
-	if (!texture->loadFromFile("Textures/spriteAtlas.png"))
+	if (!texture.loadFromFile("Textures/spriteAtlas.png"))
 	{
 		std::cout << "Failed to load player spritesheet!" << std::endl;
 	}
 
-	deadend1 = new sf::Texture();
-	if (!deadend1->loadFromFile("Textures/Deadend1.png"))
+	//deadend1 = new sf::Texture();
+	if (!deadend1.loadFromFile("Textures/Deadend1.png"))
 		std::cout << "Failed to load" << "Deadend1.png";
 
-	deadend2 = new sf::Texture();
-	if (!deadend2->loadFromFile("Textures/Deadend2.png"))
+	//deadend2 = new sf::Texture();
+	if (!deadend2.loadFromFile("Textures/Deadend2.png"))
 		std::cout << "Failed to load" << "Deadend2.png";
 
-	deadend3 = new sf::Texture();
-	if (!deadend3->loadFromFile("Textures/Deadend3.png"))
+	//deadend3 = new sf::Texture();
+	if (!deadend3.loadFromFile("Textures/Deadend3.png"))
 		std::cout << "Failed to load" << "Deadend3.png";
 
-	deadend4 = new sf::Texture();
-	if (!deadend4->loadFromFile("Textures/Deadend4.png"))
+	//deadend4 = new sf::Texture();
+	if (!deadend4.loadFromFile("Textures/Deadend4.png"))
 		std::cout << "Failed to load" << "Deadend4.png";
 
-	corner1 = new sf::Texture();
-	if (!corner1->loadFromFile("Textures/Corner1.png"))
+	//corner1 = new sf::Texture();
+	if (!corner1.loadFromFile("Textures/Corner1.png"))
 		std::cout << "Failed to load" << "Corner1.png";
 
-	corner2 = new sf::Texture();
-	if (!corner2->loadFromFile("Textures/Corner2.png"))
+	//corner2 = new sf::Texture();
+	if (!corner2.loadFromFile("Textures/Corner2.png"))
 		std::cout << "Failed to load" << "Corner2.png";
 
-	corner3 = new sf::Texture();
-	if (!corner3->loadFromFile("Textures/Corner3.png"))
+	//corner3 = new sf::Texture();
+	if (!corner3.loadFromFile("Textures/Corner3.png"))
 		std::cout << "Failed to load" << "Corner3.png";
 
-	corner4 = new sf::Texture();
-	if (!corner4->loadFromFile("Textures/Corner4.png"))
+	//corner4 = new sf::Texture();
+	if (!corner4.loadFromFile("Textures/Corner4.png"))
 		std::cout << "Failed to load" << "Corner4.png";
 
-	path1 = new sf::Texture();
-	if (!path1->loadFromFile("Textures/Path1.png"))
+	//path1 = new sf::Texture();
+	if (!path1.loadFromFile("Textures/Path1.png"))
 		std::cout << "Failed to load" << "Path1.png";
 
-	path2 = new sf::Texture();
-	if (!path2->loadFromFile("Textures/Path2.png"))
+	//path2 = new sf::Texture();
+	if (!path2.loadFromFile("Textures/Path2.png"))
 		std::cout << "Failed to load" << "Path2.png";
 
-	threeway1 = new sf::Texture();
-	if (!threeway1->loadFromFile("Textures/Threeway1.png"))
+	//threeway1 = new sf::Texture();
+	if (!threeway1.loadFromFile("Textures/Threeway1.png"))
 		std::cout << "Failed to load" << "Threeway1.png";
 
-	threeway2 = new sf::Texture();
-	if (!threeway2->loadFromFile("Textures/Threeway2.png"))
+	//threeway2 = new sf::Texture();
+	if (!threeway2.loadFromFile("Textures/Threeway2.png"))
 		std::cout << "Failed to load" << "Threeway2.png";
 
-	threeway3 = new sf::Texture();
-	if (!threeway3->loadFromFile("Textures/Threeway3.png"))
+	//threeway3 = new sf::Texture();
+	if (!threeway3.loadFromFile("Textures/Threeway3.png"))
 		std::cout << "Failed to load" << "Threeway3.png";
 
-	threeway4 = new sf::Texture();
-	if (!threeway4->loadFromFile("Textures/Threeway4.png"))
+	//threeway4 = new sf::Texture();
+	if (!threeway4.loadFromFile("Textures/Threeway4.png"))
 		std::cout << "Failed to load" << "Threeway4.png";
 
-	intercross = new sf::Texture();
-	if (!intercross->loadFromFile("Textures/Intercross.png"))
+	//intercross = new sf::Texture();
+	if (!intercross.loadFromFile("Textures/Intercross.png"))
 		std::cout << "Failed to load" << "Intercross.png";
 
 	//Read Level1.txt and extract size of tiles and size of pickups
@@ -124,22 +123,22 @@ Level::Level()
 
 Level::~Level()
 {
-	texture->~Texture();
-	deadend1->~Texture();
-	deadend2->~Texture();
-	deadend3->~Texture();
-	deadend4->~Texture();
-	corner1->~Texture();
-	corner2->~Texture();
-	corner3->~Texture();
-	corner4->~Texture();
-	path1->~Texture();
-	path2->~Texture();
-	threeway1->~Texture();
-	threeway2->~Texture();
-	threeway3->~Texture();
-	threeway4->~Texture();
-	intercross->~Texture();
+	texture.~Texture();
+	deadend1.~Texture();
+	deadend2.~Texture();
+	deadend3.~Texture();
+	deadend4.~Texture();
+	corner1.~Texture();
+	corner2.~Texture();
+	corner3.~Texture();
+	corner4.~Texture();
+	path1.~Texture();
+	path2.~Texture();
+	threeway1.~Texture();
+	threeway2.~Texture();
+	threeway3.~Texture();
+	threeway4.~Texture();
+	intercross.~Texture();
 }
 
 void Level::Draw(sf::RenderWindow & window)
@@ -193,7 +192,7 @@ bool Level::LevelCompleted()
 	return pickupsPickedup == PICKUPSSIZE;
 }
 
-int Level::AddPickUpsToPath2(int x, int y, int pickupIndex, sf::Texture * texture)
+int Level::AddPickUpsToPath2(int x, int y, int pickupIndex)
 {
 	//* * *
 	//
@@ -208,7 +207,7 @@ int Level::AddPickUpsToPath2(int x, int y, int pickupIndex, sf::Texture * textur
 	return 3;
 }
 
-int Level::AddPickUpsToPath1(int x, int y, int pickupIndex, sf::Texture * texture)
+int Level::AddPickUpsToPath1(int x, int y, int pickupIndex)
 {
 	//*  *
 	//*  *
@@ -223,7 +222,7 @@ int Level::AddPickUpsToPath1(int x, int y, int pickupIndex, sf::Texture * textur
 	return 3;
 }
 
-int Level::AddPickUpsToCorner1(int x, int y, int pickupIndex, sf::Texture * texture)
+int Level::AddPickUpsToCorner1(int x, int y, int pickupIndex)
 {
 	//* * *
 	//*
@@ -238,7 +237,7 @@ int Level::AddPickUpsToCorner1(int x, int y, int pickupIndex, sf::Texture * text
 	return 3;
 }
 
-int Level::AddPickUpsToCorner2(int x, int y, int pickupIndex, sf::Texture * texture)
+int Level::AddPickUpsToCorner2(int x, int y, int pickupIndex)
 {
 	//* * *
 	//    *
@@ -253,7 +252,7 @@ int Level::AddPickUpsToCorner2(int x, int y, int pickupIndex, sf::Texture * text
 	return 3;
 }
 
-int Level::AddPickUpsToCorner3(int x, int y, int pickupIndex, sf::Texture * texture)
+int Level::AddPickUpsToCorner3(int x, int y, int pickupIndex)
 {
 	//    *
 	//    *
@@ -268,7 +267,7 @@ int Level::AddPickUpsToCorner3(int x, int y, int pickupIndex, sf::Texture * text
 	return 3;
 }
 
-int Level::AddPickUpsToCorner4(int x, int y, int pickupIndex, sf::Texture * texture)
+int Level::AddPickUpsToCorner4(int x, int y, int pickupIndex)
 {
 	//*
 	//*
@@ -283,22 +282,22 @@ int Level::AddPickUpsToCorner4(int x, int y, int pickupIndex, sf::Texture * text
 	return 3;
 }
 
-int Level::AddPickUpsToThreeway1(int x, int y, int pickupIndex, sf::Texture * texture)
+int Level::AddPickUpsToThreeway1(int x, int y, int pickupIndex)
 {
 	return 0;
 }
 
-int Level::AddPickUpsToThreeway2(int x, int y, int pickupIndex, sf::Texture * texture)
+int Level::AddPickUpsToThreeway2(int x, int y, int pickupIndex)
 {
 	return 0;
 }
 
-int Level::AddPickUpsToThreeway3(int x, int y, int pickupIndex, sf::Texture * texture)
+int Level::AddPickUpsToThreeway3(int x, int y, int pickupIndex)
 {
 	return 0;
 }
 
-int Level::AddPickUpsToThreeway4(int x, int y, int pickupIndex, sf::Texture * texture)
+int Level::AddPickUpsToThreeway4(int x, int y, int pickupIndex)
 {
 	return 0;
 }
@@ -368,37 +367,37 @@ int Level::CreatePickupsForTile(Tile::TileType tileType, int x, int y, int picku
 		return 0;
 		break;
 	case Tile::TileType::Path1:
-		return AddPickUpsToPath1(x, y, pickupIndex, texture);
+		return AddPickUpsToPath1(x, y, pickupIndex);
 		break;
 	case Tile::TileType::Path2:
-		return AddPickUpsToPath2(x, y, pickupIndex, texture);
+		return AddPickUpsToPath2(x, y, pickupIndex);
 		break;
 	case Tile::TileType::Corner1:
-		return AddPickUpsToCorner1(x, y, pickupIndex, texture);
+		return AddPickUpsToCorner1(x, y, pickupIndex);
 		break;
 	case Tile::TileType::Corner2:
-		return AddPickUpsToCorner2(x, y, pickupIndex, texture);
+		return AddPickUpsToCorner2(x, y, pickupIndex);
 		break;
 	case Tile::TileType::Corner3:
-		return AddPickUpsToCorner3(x, y, pickupIndex, texture);
+		return AddPickUpsToCorner3(x, y, pickupIndex);
 		break;
 	case Tile::TileType::Corner4:
-		return AddPickUpsToCorner4(x, y, pickupIndex, texture);
+		return AddPickUpsToCorner4(x, y, pickupIndex);
 		break;
 	case Tile::TileType::Threeway1:
-		return AddPickUpsToThreeway1(x, y, pickupIndex, texture);
+		return AddPickUpsToThreeway1(x, y, pickupIndex);
 		break;
 	case Tile::TileType::Threeway2:
-		return AddPickUpsToThreeway2(x, y, pickupIndex, texture);
+		return AddPickUpsToThreeway2(x, y, pickupIndex);
 		break;
 	case Tile::TileType::Threeway3:
-		return AddPickUpsToThreeway3(x, y, pickupIndex, texture);
+		return AddPickUpsToThreeway3(x, y, pickupIndex);
 		break;
 	case Tile::TileType::Threeway4:
-		return AddPickUpsToThreeway4(x, y, pickupIndex, texture);
+		return AddPickUpsToThreeway4(x, y, pickupIndex);
 		break;
 	case Tile::TileType::Intercross:
-		//return AddPickUpsToIntercross(*x, *y, pickupIndex, texture);
+		//return AddPickUpsToIntercross(*x, *y, pickupIndex);
 		return 0;
 		break;
 	default:
