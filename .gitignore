@@ -1,3 +1,6 @@
 Debug/
 Pacman.VC.VC.opendb
 Pacman.VC.db
+.vs/Pacman/v14/.suo
+*.ipch
+sh.exe.stackdump
