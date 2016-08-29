@@ -7,6 +7,12 @@
 #include "AnimatedSprite.h"
 #include "Tile.h"
 
+#include <fstream>
+#include <sstream>
+#include <string>
+#include <vector>
+
+using namespace std;
 class Level
 {
 public:
@@ -23,10 +29,10 @@ public:
 private:
 	sf::Texture * texture;
 
-	const int LEVELSIZE = 110;
+	int LEVELSIZE;
 	Tile * pTiles;
 
-	const int PICKUPSSIZE = 180;
+	int PICKUPSSIZE;
 	Pickup * pPickups;
 
 	int pickupsPickedup;
@@ -47,19 +53,23 @@ private:
 	sf::Texture * threeway4;
 	sf::Texture * intercross;
 
-	void AddPickUpsToPath2(int x, int y, int * pickupIndex, sf::Texture * texture);
-	void AddPickUpsToPath1(int x, int y, int * pickupIndex, sf::Texture * texture);
+	int AddPickUpsToPath2(int x, int y, int pickupIndex, sf::Texture * texture);
+	int AddPickUpsToPath1(int x, int y, int pickupIndex, sf::Texture * texture);
 
-	void AddPickUpsToCorner1(int x, int y, int * pickupIndex, sf::Texture * texture);
-	void AddPickUpsToCorner2(int x, int y, int * pickupIndex, sf::Texture * texture);
-	void AddPickUpsToCorner3(int x, int y, int * pickupIndex, sf::Texture * texture);
-	void AddPickUpsToCorner4(int x, int y, int * pickupIndex, sf::Texture * texture);
+	int AddPickUpsToCorner1(int x, int y, int pickupIndex, sf::Texture * texture);
+	int AddPickUpsToCorner2(int x, int y, int pickupIndex, sf::Texture * texture);
+	int AddPickUpsToCorner3(int x, int y, int pickupIndex, sf::Texture * texture);
+	int AddPickUpsToCorner4(int x, int y, int pickupIndex, sf::Texture * texture);
 
-	void AddPickUpsToThreeway1(int x, int y, int * pickupIndex, sf::Texture * texture);
-	void AddPickUpsToThreeway2(int x, int y, int * pickupIndex, sf::Texture * texture);
-	void AddPickUpsToThreeway3(int x, int y, int * pickupIndex, sf::Texture * texture);
-	void AddPickUpsToThreeway4(int x, int y, int * pickupIndex, sf::Texture * texture);
+	int AddPickUpsToThreeway1(int x, int y, int pickupIndex, sf::Texture * texture);
+	int AddPickUpsToThreeway2(int x, int y, int pickupIndex, sf::Texture * texture);
+	int AddPickUpsToThreeway3(int x, int y, int pickupIndex, sf::Texture * texture);
+	int AddPickUpsToThreeway4(int x, int y, int pickupIndex, sf::Texture * texture);
 
-	void CreateLevelTile(Tile::TileType tile, int * x, int * y, int * tileIndex, int * pickupIndex);
+	void CreateLevelTile(Tile::TileType tileType, int x, int y, int tileIndex);
+	int CreatePickupsForTile(Tile::TileType tileType, int x, int y, int pickupIndex);
+
+	void Split(const string &s, char delim, vector<string> &elems);
+	vector<string> Split(const string &s, char delim);
 };
 

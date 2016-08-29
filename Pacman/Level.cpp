@@ -72,329 +72,74 @@ Level::Level()
 	if (!intercross->loadFromFile("Textures/Intercross.png"))
 		std::cout << "Failed to load" << "Intercross.png";
 
-
-	//TODO
 	//Read Level1.txt and extract size of tiles and size of pickups
 	//go through the file and create the level
+	std::ifstream infile("Level1.txt");
+	string line;
+	
+	getline(infile, line); //size of level
+	vector<string> size = Split(line, 'x');
+	int width;
+	istringstream(size[0]) >> width;
+	int height;
+	istringstream(size[1]) >> height;
+	LEVELSIZE = width * height;
 
-	Tile tiles[10];
-	pTiles = tiles;
-	Pickup pickups[10];
-	pPickups = pickups;
+	getline(infile, line); //num of pickups
+	istringstream(line) >> PICKUPSSIZE;
+
+	pTiles = new Tile[LEVELSIZE];
+	pPickups = new Pickup[PICKUPSSIZE];
 
 	int pickupIndex = 0;
-	int * pPickupIndex = &pickupIndex;
-
 	int tileIndex = 0;
-	int * pTileIndex = &tileIndex;
 
 	int yStartValue = 50;
 	int xStartValue = 50;
 	int x = xStartValue, y = yStartValue;
-	int * pX = &x, *pY = &y;
 
-	tiles[0] = Tile(sf::Vector2f(x, y), corner1, Tile::TileType::Corner1);
-	AddPickUpsToCorner1(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[1] = Tile(sf::Vector2f(x, y), path1, Tile::TileType::Path1);
-	AddPickUpsToPath1(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[2] = Tile(sf::Vector2f(x, y), threeway4, Tile::TileType::Threeway4);
-	y += 64;
-	tiles[3] = Tile(sf::Vector2f(x, y), corner4, Tile::TileType::Corner4);
-	AddPickUpsToCorner4(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[4] = Tile(sf::Vector2f(x, y), deadend4, Tile::TileType::Deadend4);
-	y += 64;
-	tiles[5] = Tile(sf::Vector2f(x, y), deadend4, Tile::TileType::Deadend4);
-	y += 64;
-	tiles[6] = Tile(sf::Vector2f(x, y), deadend4, Tile::TileType::Deadend4);
-	y += 64;
-	tiles[7] = Tile(sf::Vector2f(x, y), corner1, Tile::TileType::Corner1);
-	AddPickUpsToCorner1(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[8] = Tile(sf::Vector2f(x, y), corner4, Tile::TileType::Corner4);
-	AddPickUpsToCorner4(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[9] = Tile(sf::Vector2f(x, y), corner1, Tile::TileType::Corner1);
-	AddPickUpsToCorner1(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[10] = Tile(sf::Vector2f(x, y), corner4, Tile::TileType::Corner4);
-	AddPickUpsToCorner4(x, y, pPickupIndex, texture);
+	while (getline(infile, line))
+	{
+		vector<string> rowElements = Split(line, ':');
 
-	x += 64;
-	y = yStartValue;
-	tiles[11] = Tile(sf::Vector2f(x, y), path2, Tile::TileType::Path2);
-	AddPickUpsToPath2(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[12] = Tile(sf::Vector2f(x, y), intercross, Tile::TileType::Intercross);
-	y += 64;
-	tiles[13] = Tile(sf::Vector2f(x, y), path2, Tile::TileType::Path2);
-	AddPickUpsToPath2(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[14] = Tile(sf::Vector2f(x, y), path2, Tile::TileType::Path2);
-	AddPickUpsToPath2(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[15] = Tile(sf::Vector2f(x, y), deadend2, Tile::TileType::Deadend2);
-	y += 64;
-	tiles[16] = Tile(sf::Vector2f(x, y), path2, Tile::TileType::Path2);
-	AddPickUpsToPath2(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[17] = Tile(sf::Vector2f(x, y), deadend2, Tile::TileType::Deadend2);
-	y += 64;
-	tiles[18] = Tile(sf::Vector2f(x, y), path2, Tile::TileType::Path2);
-	AddPickUpsToPath2(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[19] = Tile(sf::Vector2f(x, y), corner2, Tile::TileType::Corner2);
-	AddPickUpsToCorner2(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[20] = Tile(sf::Vector2f(x, y), threeway3, Tile::TileType::Threeway3);
-	y += 64;
-	tiles[21] = Tile(sf::Vector2f(x, y), path2, Tile::TileType::Path2);
-	AddPickUpsToPath2(x, y, pPickupIndex, texture);
-
-	x += 64;
-	y = yStartValue;
-	tiles[22] = Tile(sf::Vector2f(x, y), threeway1, Tile::TileType::Threeway1);
-	y += 64;
-	tiles[23] = Tile(sf::Vector2f(x, y), path1, Tile::TileType::Path1);
-	AddPickUpsToPath1(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[24] = Tile(sf::Vector2f(x, y), intercross, Tile::TileType::Intercross);
-	y += 64;
-	tiles[25] = Tile(sf::Vector2f(x, y), threeway2, Tile::TileType::Threeway2);
-	y += 64;
-	tiles[26] = Tile(sf::Vector2f(x, y), path1, Tile::TileType::Path1);
-	AddPickUpsToPath1(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[27] = Tile(sf::Vector2f(x, y), intercross, Tile::TileType::Intercross);
-	y += 64;
-	tiles[28] = Tile(sf::Vector2f(x, y), path1, Tile::TileType::Path1);
-	y += 64;
-	tiles[29] = Tile(sf::Vector2f(x, y), intercross, Tile::TileType::Intercross);
-	y += 64;
-	tiles[30] = Tile(sf::Vector2f(x, y), threeway4, Tile::TileType::Threeway4);
-	y += 64;
-	tiles[31] = Tile(sf::Vector2f(x, y), corner3, Tile::TileType::Corner3);
-	AddPickUpsToCorner3(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[32] = Tile(sf::Vector2f(x, y), path2, Tile::TileType::Path2);
-	AddPickUpsToPath2(x, y, pPickupIndex, texture);
-
-	x += 64;
-	y = yStartValue;
-	tiles[33] = Tile(sf::Vector2f(x, y), path2, Tile::TileType::Path2);
-	AddPickUpsToPath2(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[34] = Tile(sf::Vector2f(x, y), intercross, Tile::TileType::Intercross);
-	y += 64;
-	tiles[35] = Tile(sf::Vector2f(x, y), threeway1, Tile::TileType::Threeway1);
-	y += 64;
-	tiles[36] = Tile(sf::Vector2f(x, y), corner4, Tile::TileType::Corner4);
-	AddPickUpsToCorner4(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[37] = Tile(sf::Vector2f(x, y), corner1, Tile::TileType::Corner1);
-	AddPickUpsToCorner1(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[38] = Tile(sf::Vector2f(x, y), threeway2, Tile::TileType::Threeway2);
-	y += 64;
-	tiles[39] = Tile(sf::Vector2f(x, y), threeway4, Tile::TileType::Threeway4);
-	y += 64;
-	tiles[40] = Tile(sf::Vector2f(x, y), threeway3, Tile::TileType::Threeway3);
-	y += 64;
-	tiles[41] = Tile(sf::Vector2f(x, y), threeway1, Tile::TileType::Threeway1);
-	y += 64;
-	tiles[42] = Tile(sf::Vector2f(x, y), corner4, Tile::TileType::Corner4);
-	AddPickUpsToCorner4(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[43] = Tile(sf::Vector2f(x, y), path2, Tile::TileType::Path2);
-	AddPickUpsToPath2(x, y, pPickupIndex, texture);
-
-	x += 64;
-	y = yStartValue;
-	tiles[44] = Tile(sf::Vector2f(x, y), corner2, Tile::TileType::Corner2);
-	AddPickUpsToCorner2(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[45] = Tile(sf::Vector2f(x, y), path1, Tile::TileType::Path1);
-	AddPickUpsToPath1(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[46] = Tile(sf::Vector2f(x, y), threeway3, Tile::TileType::Threeway3);
-	y += 64;
-	tiles[47] = Tile(sf::Vector2f(x, y), corner2, Tile::TileType::Corner2);
-	AddPickUpsToCorner2(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[48] = Tile(sf::Vector2f(x, y), corner3, Tile::TileType::Corner3);
-	AddPickUpsToCorner3(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[49] = Tile(sf::Vector2f(x, y), deadend4, Tile::TileType::Deadend4);
-	y += 64;
-	tiles[50] = Tile(sf::Vector2f(x, y), path2, Tile::TileType::Path2);
-	AddPickUpsToPath2(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[51] = Tile(sf::Vector2f(x, y), corner2, Tile::TileType::Corner2);
-	AddPickUpsToCorner2(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[52] = Tile(sf::Vector2f(x, y), threeway3, Tile::TileType::Threeway3);
-	y += 64;
-	tiles[53] = Tile(sf::Vector2f(x, y), corner2, Tile::TileType::Corner2);
-	AddPickUpsToCorner2(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[54] = Tile(sf::Vector2f(x, y), threeway3, Tile::TileType::Threeway3);
-
-	x += 64;
-	y = yStartValue;
-	tiles[55] = Tile(sf::Vector2f(x, y), corner1, Tile::TileType::Corner1);
-	AddPickUpsToCorner1(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[56] = Tile(sf::Vector2f(x, y), path1, Tile::TileType::Path1);
-	AddPickUpsToPath1(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[57] = Tile(sf::Vector2f(x, y), threeway3, Tile::TileType::Threeway3);
-	y += 64;
-	tiles[58] = Tile(sf::Vector2f(x, y), corner1, Tile::TileType::Corner1);
-	AddPickUpsToCorner1(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[59] = Tile(sf::Vector2f(x, y), corner4, Tile::TileType::Corner4);
-	AddPickUpsToCorner4(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[60] = Tile(sf::Vector2f(x, y), deadend2, Tile::TileType::Deadend2);
-	y += 64;
-	tiles[61] = Tile(sf::Vector2f(x, y), path2, Tile::TileType::Path2);
-	AddPickUpsToPath2(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[62] = Tile(sf::Vector2f(x, y), corner1, Tile::TileType::Corner1);
-	AddPickUpsToCorner1(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[63] = Tile(sf::Vector2f(x, y), threeway3, Tile::TileType::Threeway3);
-	y += 64;
-	tiles[64] = Tile(sf::Vector2f(x, y), corner1, Tile::TileType::Corner1);
-	AddPickUpsToCorner1(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[65] = Tile(sf::Vector2f(x, y), threeway3, Tile::TileType::Threeway3);
-
-	x += 64;
-	y = yStartValue;
-	tiles[66] = Tile(sf::Vector2f(x, y), path2, Tile::TileType::Path2);
-	AddPickUpsToPath2(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[67] = Tile(sf::Vector2f(x, y), intercross, Tile::TileType::Intercross);
-	y += 64;
-	tiles[68] = Tile(sf::Vector2f(x, y), threeway1, Tile::TileType::Threeway1);
-	y += 64;
-	tiles[69] = Tile(sf::Vector2f(x, y), corner3, Tile::TileType::Corner3);
-	AddPickUpsToCorner3(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[70] = Tile(sf::Vector2f(x, y), corner2, Tile::TileType::Corner2);
-	AddPickUpsToCorner2(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[71] = Tile(sf::Vector2f(x, y), threeway4, Tile::TileType::Threeway4);
-	y += 64;
-	tiles[72] = Tile(sf::Vector2f(x, y), threeway2, Tile::TileType::Threeway2);
-	y += 64;
-	tiles[73] = Tile(sf::Vector2f(x, y), threeway3, Tile::TileType::Threeway3);
-	y += 64;
-	tiles[74] = Tile(sf::Vector2f(x, y), threeway1, Tile::TileType::Threeway1);
-	y += 64;
-	tiles[75] = Tile(sf::Vector2f(x, y), corner3, Tile::TileType::Corner3);
-	AddPickUpsToCorner3(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[76] = Tile(sf::Vector2f(x, y), path2, Tile::TileType::Path2);
-	AddPickUpsToPath2(x, y, pPickupIndex, texture);
-
-	x += 64;
-	y = yStartValue;
-	tiles[77] = Tile(sf::Vector2f(x, y), threeway1, Tile::TileType::Threeway1);
-	y += 64;
-	tiles[78] = Tile(sf::Vector2f(x, y), path1, Tile::TileType::Path1);
-	AddPickUpsToPath1(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[79] = Tile(sf::Vector2f(x, y), intercross, Tile::TileType::Intercross);
-	y += 64;
-	tiles[80] = Tile(sf::Vector2f(x, y), threeway4, Tile::TileType::Threeway4);
-	y += 64;
-	tiles[81] = Tile(sf::Vector2f(x, y), path1, Tile::TileType::Path1);
-	AddPickUpsToPath1(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[82] = Tile(sf::Vector2f(x, y), intercross, Tile::TileType::Intercross);
-	y += 64;
-	tiles[83] = Tile(sf::Vector2f(x, y), path1, Tile::TileType::Path1);
-	y += 64;
-	tiles[84] = Tile(sf::Vector2f(x, y), intercross, Tile::TileType::Intercross);
-	y += 64;
-	tiles[85] = Tile(sf::Vector2f(x, y), threeway2, Tile::TileType::Threeway2);
-	y += 64;
-	tiles[86] = Tile(sf::Vector2f(x, y), corner4, Tile::TileType::Corner4);
-	AddPickUpsToCorner4(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[87] = Tile(sf::Vector2f(x, y), path2, Tile::TileType::Path2);
-	AddPickUpsToPath2(x, y, pPickupIndex, texture);
-
-	x += 64;
-	y = yStartValue;
-	tiles[88] = Tile(sf::Vector2f(x, y), path2, Tile::TileType::Path2);
-	AddPickUpsToPath2(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[89] = Tile(sf::Vector2f(x, y), intercross, Tile::TileType::Intercross);
-	y += 64;
-	tiles[90] = Tile(sf::Vector2f(x, y), path2, Tile::TileType::Path2);
-	AddPickUpsToPath2(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[91] = Tile(sf::Vector2f(x, y), path2, Tile::TileType::Path2);
-	AddPickUpsToPath2(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[92] = Tile(sf::Vector2f(x, y), deadend4, Tile::TileType::Deadend4);
-	y += 64;
-	tiles[93] = Tile(sf::Vector2f(x, y), path2, Tile::TileType::Path2);
-	AddPickUpsToPath2(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[94] = Tile(sf::Vector2f(x, y), deadend4, Tile::TileType::Deadend4);
-	y += 64;
-	tiles[95] = Tile(sf::Vector2f(x, y), path2, Tile::TileType::Path2);
-	AddPickUpsToPath2(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[96] = Tile(sf::Vector2f(x, y), corner1, Tile::TileType::Corner1);
-	AddPickUpsToCorner1(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[97] = Tile(sf::Vector2f(x, y), threeway3, Tile::TileType::Threeway3);
-	y += 64;
-	tiles[98] = Tile(sf::Vector2f(x, y), path2, Tile::TileType::Path2);
-	AddPickUpsToPath2(x, y, pPickupIndex, texture);
-
-	x += 64;
-	y = yStartValue;
-	tiles[99] = Tile(sf::Vector2f(x, y), corner2, Tile::TileType::Corner2);
-	AddPickUpsToCorner2(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[100] = Tile(sf::Vector2f(x, y), path1, Tile::TileType::Path1);
-	AddPickUpsToPath1(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[101] = Tile(sf::Vector2f(x, y), threeway2, Tile::TileType::Threeway2);
-	y += 64;
-	tiles[102] = Tile(sf::Vector2f(x, y), corner3, Tile::TileType::Corner3);
-	AddPickUpsToCorner3(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[103] = Tile(sf::Vector2f(x, y), deadend2, Tile::TileType::Deadend2);
-	y += 64;
-	tiles[104] = Tile(sf::Vector2f(x, y), deadend2, Tile::TileType::Deadend2);
-	y += 64;
-	tiles[105] = Tile(sf::Vector2f(x, y), deadend2, Tile::TileType::Deadend2);
-	y += 64;
-	tiles[106] = Tile(sf::Vector2f(x, y), corner2, Tile::TileType::Corner2);
-	AddPickUpsToCorner2(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[107] = Tile(sf::Vector2f(x, y), corner3, Tile::TileType::Corner3);
-	AddPickUpsToCorner3(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[108] = Tile(sf::Vector2f(x, y), corner2, Tile::TileType::Corner2);
-	AddPickUpsToCorner2(x, y, pPickupIndex, texture);
-	y += 64;
-	tiles[109] = Tile(sf::Vector2f(x, y), corner3, Tile::TileType::Corner3);
-	AddPickUpsToCorner3(x, y, pPickupIndex, texture);
+		for (int i = 0; i < width; i++)
+		{
+			int tileTypeIndex;
+			istringstream(rowElements[i]) >> tileTypeIndex;
+			Tile::TileType type = static_cast<Tile::TileType>(tileTypeIndex);
+			CreateLevelTile(type, x, y, tileIndex);
+			if (pickupIndex < PICKUPSSIZE)
+			{
+				int pickupsCreated = CreatePickupsForTile(type, x, y, pickupIndex);
+				pickupIndex += pickupsCreated;
+			}
+			tileIndex++;
+			x += 64;
+		}
+		x = xStartValue;
+		y += 64;
+	}
 }
 
 
 Level::~Level()
 {
+	texture->~Texture();
+	deadend1->~Texture();
+	deadend2->~Texture();
+	deadend3->~Texture();
+	deadend4->~Texture();
+	corner1->~Texture();
+	corner2->~Texture();
+	corner3->~Texture();
+	corner4->~Texture();
+	path1->~Texture();
+	path2->~Texture();
+	threeway1->~Texture();
+	threeway2->~Texture();
+	threeway3->~Texture();
+	threeway4->~Texture();
+	intercross->~Texture();
 }
 
 void Level::Draw(sf::RenderWindow & window)
@@ -419,9 +164,7 @@ bool Level::CheckCollision(AnimatedSprite object, sf::Vector2f direction)
 	{
 		if ((*(pTiles + i)).Intersects(rectObject) &&
 			!(*(pTiles + i)).CanTraverse(direction, rectPosition))
-		{
 			return true;
-		}
 	}
 
 	return false;
@@ -450,161 +193,233 @@ bool Level::LevelCompleted()
 	return pickupsPickedup == PICKUPSSIZE;
 }
 
-void Level::AddPickUpsToPath2(int x, int y, int * pickupIndex, sf::Texture * texture)
+int Level::AddPickUpsToPath2(int x, int y, int pickupIndex, sf::Texture * texture)
 {
 	//* * *
 	//
 	//* * *
-	*(pPickups + *pickupIndex) = Pickup(texture, sf::IntRect(387, 196, 12, 12), sf::Vector2f(x, y + 20), 10);
-	(*pickupIndex)++;
-	*(pPickups + *pickupIndex) = Pickup(texture, sf::IntRect(387, 196, 12, 12), sf::Vector2f(x + 21, y + 20), 10);
-	(*pickupIndex)++;
-	*(pPickups + *pickupIndex) = Pickup(texture, sf::IntRect(387, 196, 12, 12), sf::Vector2f(x + 42, y + 20), 10);
-	(*pickupIndex)++;
+	*(pPickups + pickupIndex) = Pickup(texture, sf::IntRect(387, 196, 12, 12), sf::Vector2f(x, y + 20), 10);
+	pickupIndex++;
+	*(pPickups + pickupIndex) = Pickup(texture, sf::IntRect(387, 196, 12, 12), sf::Vector2f(x + 21, y + 20), 10);
+	pickupIndex++;
+	*(pPickups + pickupIndex) = Pickup(texture, sf::IntRect(387, 196, 12, 12), sf::Vector2f(x + 42, y + 20), 10);
+	pickupIndex++;
+
+	return 3;
 }
 
-void Level::AddPickUpsToPath1(int x, int y, int * pickupIndex, sf::Texture * texture)
+int Level::AddPickUpsToPath1(int x, int y, int pickupIndex, sf::Texture * texture)
 {
 	//*  *
 	//*  *
 	//*  *
-	*(pPickups + *pickupIndex) = Pickup(texture, sf::IntRect(387, 196, 12, 12), sf::Vector2f(x + 20, y), 10);
-	(*pickupIndex)++;
-	*(pPickups + *pickupIndex) = Pickup(texture, sf::IntRect(387, 196, 12, 12), sf::Vector2f(x + 20, y + 21), 10);
-	(*pickupIndex)++;
-	*(pPickups + *pickupIndex) = Pickup(texture, sf::IntRect(387, 196, 12, 12), sf::Vector2f(x + 20, y + 42), 10);
-	(*pickupIndex)++;
+	*(pPickups + pickupIndex) = Pickup(texture, sf::IntRect(387, 196, 12, 12), sf::Vector2f(x + 20, y), 10);
+	pickupIndex++;
+	*(pPickups + pickupIndex) = Pickup(texture, sf::IntRect(387, 196, 12, 12), sf::Vector2f(x + 20, y + 21), 10);
+	pickupIndex++;
+	*(pPickups + pickupIndex) = Pickup(texture, sf::IntRect(387, 196, 12, 12), sf::Vector2f(x + 20, y + 42), 10);
+	pickupIndex++;
+
+	return 3;
 }
 
-void Level::AddPickUpsToCorner1(int x, int y, int * pickupIndex, sf::Texture * texture)
+int Level::AddPickUpsToCorner1(int x, int y, int pickupIndex, sf::Texture * texture)
 {
 	//* * *
 	//*
 	//*
-	*(pPickups + *pickupIndex) = Pickup(texture, sf::IntRect(387, 196, 12, 12), sf::Vector2f(x + 42, y + 20), 10);
-	(*pickupIndex)++;
-	*(pPickups + *pickupIndex) = Pickup(texture, sf::IntRect(387, 196, 12, 12), sf::Vector2f(x + 20, y + 20), 10);
-	(*pickupIndex)++;
-	*(pPickups + *pickupIndex) = Pickup(texture, sf::IntRect(387, 196, 12, 12), sf::Vector2f(x + 20, y + 42), 10);
-	(*pickupIndex)++;
+	*(pPickups + pickupIndex) = Pickup(texture, sf::IntRect(387, 196, 12, 12), sf::Vector2f(x + 42, y + 20), 10);
+	pickupIndex++;
+	*(pPickups + pickupIndex) = Pickup(texture, sf::IntRect(387, 196, 12, 12), sf::Vector2f(x + 20, y + 20), 10);
+	pickupIndex++;
+	*(pPickups + pickupIndex) = Pickup(texture, sf::IntRect(387, 196, 12, 12), sf::Vector2f(x + 20, y + 42), 10);
+	pickupIndex++;
+
+	return 3;
 }
 
-void Level::AddPickUpsToCorner2(int x, int y, int * pickupIndex, sf::Texture * texture)
+int Level::AddPickUpsToCorner2(int x, int y, int pickupIndex, sf::Texture * texture)
 {
 	//* * *
 	//    *
 	//    *
-	*(pPickups + *pickupIndex) = Pickup(texture, sf::IntRect(387, 196, 12, 12), sf::Vector2f(x, y + 20), 10);
-	(*pickupIndex)++;
-	*(pPickups + *pickupIndex) = Pickup(texture, sf::IntRect(387, 196, 12, 12), sf::Vector2f(x + 20, y + 20), 10);
-	(*pickupIndex)++;
-	*(pPickups + *pickupIndex) = Pickup(texture, sf::IntRect(387, 196, 12, 12), sf::Vector2f(x + 20, y + 42), 10);
-	(*pickupIndex)++;
+	*(pPickups + pickupIndex) = Pickup(texture, sf::IntRect(387, 196, 12, 12), sf::Vector2f(x, y + 20), 10);
+	pickupIndex++;
+	*(pPickups + pickupIndex) = Pickup(texture, sf::IntRect(387, 196, 12, 12), sf::Vector2f(x + 20, y + 20), 10);
+	pickupIndex++;
+	*(pPickups + pickupIndex) = Pickup(texture, sf::IntRect(387, 196, 12, 12), sf::Vector2f(x + 20, y + 42), 10);
+	pickupIndex++;
+
+	return 3;
 }
 
-void Level::AddPickUpsToCorner3(int x, int y, int * pickupIndex, sf::Texture * texture)
+int Level::AddPickUpsToCorner3(int x, int y, int pickupIndex, sf::Texture * texture)
 {
 	//    *
 	//    *
 	//* * *
-	*(pPickups + *pickupIndex) = Pickup(texture, sf::IntRect(387, 196, 12, 12), sf::Vector2f(x + 21, y), 10);
-	(*pickupIndex)++;
-	*(pPickups + *pickupIndex) = Pickup(texture, sf::IntRect(387, 196, 12, 12), sf::Vector2f(x + 20, y + 20), 10);
-	(*pickupIndex)++;
-	*(pPickups + *pickupIndex) = Pickup(texture, sf::IntRect(387, 196, 12, 12), sf::Vector2f(x, y + 20), 10);
-	(*pickupIndex)++;
+	*(pPickups + pickupIndex) = Pickup(texture, sf::IntRect(387, 196, 12, 12), sf::Vector2f(x + 21, y), 10);
+	pickupIndex++;
+	*(pPickups + pickupIndex) = Pickup(texture, sf::IntRect(387, 196, 12, 12), sf::Vector2f(x + 20, y + 20), 10);
+	pickupIndex++;
+	*(pPickups + pickupIndex) = Pickup(texture, sf::IntRect(387, 196, 12, 12), sf::Vector2f(x, y + 20), 10);
+	pickupIndex++;
+
+	return 3;
 }
 
-void Level::AddPickUpsToCorner4(int x, int y, int * pickupIndex, sf::Texture * texture)
+int Level::AddPickUpsToCorner4(int x, int y, int pickupIndex, sf::Texture * texture)
 {
 	//*
 	//*
 	//* * *
-	*(pPickups + *pickupIndex) = Pickup(texture, sf::IntRect(387, 196, 12, 12), sf::Vector2f(x + 20, y), 10);
-	(*pickupIndex)++;
-	*(pPickups + *pickupIndex) = Pickup(texture, sf::IntRect(387, 196, 12, 12), sf::Vector2f(x + 20, y + 20), 10);
-	(*pickupIndex)++;
-	*(pPickups + *pickupIndex) = Pickup(texture, sf::IntRect(387, 196, 12, 12), sf::Vector2f(x + 42, y + 20), 10);
-	(*pickupIndex)++;
+	*(pPickups + pickupIndex) = Pickup(texture, sf::IntRect(387, 196, 12, 12), sf::Vector2f(x + 20, y), 10);
+	pickupIndex++;
+	*(pPickups + pickupIndex) = Pickup(texture, sf::IntRect(387, 196, 12, 12), sf::Vector2f(x + 20, y + 20), 10);
+	pickupIndex++;
+	*(pPickups + pickupIndex) = Pickup(texture, sf::IntRect(387, 196, 12, 12), sf::Vector2f(x + 42, y + 20), 10);
+	pickupIndex++;
+
+	return 3;
 }
 
-void Level::AddPickUpsToThreeway1(int x, int y, int * pickupIndex, sf::Texture * texture)
+int Level::AddPickUpsToThreeway1(int x, int y, int pickupIndex, sf::Texture * texture)
 {
+	return 0;
 }
 
-void Level::AddPickUpsToThreeway2(int x, int y, int * pickupIndex, sf::Texture * texture)
+int Level::AddPickUpsToThreeway2(int x, int y, int pickupIndex, sf::Texture * texture)
 {
+	return 0;
 }
 
-void Level::AddPickUpsToThreeway3(int x, int y, int * pickupIndex, sf::Texture * texture)
+int Level::AddPickUpsToThreeway3(int x, int y, int pickupIndex, sf::Texture * texture)
 {
+	return 0;
 }
 
-void Level::AddPickUpsToThreeway4(int x, int y, int * pickupIndex, sf::Texture * texture)
+int Level::AddPickUpsToThreeway4(int x, int y, int pickupIndex, sf::Texture * texture)
 {
+	return 0;
 }
 
-void Level::CreateLevelTile(Tile::TileType tileType, int * x, int * y, int * tileIndex, int * pickupIndex)
+void Level::CreateLevelTile(Tile::TileType tileType, int x, int y, int tileIndex)
 {
 		switch (tileType)
 		{
 		case Tile::TileType::Deadend1:
-			*(pTiles + *tileIndex) = Tile(sf::Vector2f(*x, *y), deadend1, tileType);
+			*(pTiles + tileIndex) = Tile(sf::Vector2f(x, y), deadend1, tileType);
 			break;
 		case Tile::TileType::Deadend2:
-			*(pTiles + *tileIndex) = Tile(sf::Vector2f(*x, *y), deadend2, tileType);
+			*(pTiles + tileIndex) = Tile(sf::Vector2f(x, y), deadend2, tileType);
 			break;
 		case Tile::TileType::Deadend3:
-			*(pTiles + *tileIndex) = Tile(sf::Vector2f(*x, *y), deadend3, tileType);
+			*(pTiles + tileIndex) = Tile(sf::Vector2f(x, y), deadend3, tileType);
 			break;
 		case Tile::TileType::Deadend4:
-			*(pTiles + *tileIndex) = Tile(sf::Vector2f(*x, *y), deadend4, tileType);
+			*(pTiles + tileIndex) = Tile(sf::Vector2f(x, y), deadend4, tileType);
 			break;
 		case Tile::TileType::Path1:
-			*(pTiles + *tileIndex) = Tile(sf::Vector2f(*x, *y), path1, tileType);
-			AddPickUpsToPath1(*x, *y, pickupIndex, texture);
+			*(pTiles + tileIndex) = Tile(sf::Vector2f(x, y), path1, tileType);
 			break;
 		case Tile::TileType::Path2:
-			*(pTiles + *tileIndex) = Tile(sf::Vector2f(*x, *y), path2, tileType);
-			AddPickUpsToPath2(*x, *y, pickupIndex, texture);
+			*(pTiles + tileIndex) = Tile(sf::Vector2f(x, y), path2, tileType);
 			break;
 		case Tile::TileType::Corner1:
-			*(pTiles + *tileIndex) = Tile(sf::Vector2f(*x, *y), corner1, tileType);
-			AddPickUpsToCorner1(*x, *y, pickupIndex, texture);
+			*(pTiles + tileIndex) = Tile(sf::Vector2f(x, y), corner1, tileType);
 			break;
 		case Tile::TileType::Corner2:
-			*(pTiles + *tileIndex) = Tile(sf::Vector2f(*x, *y), corner2, tileType);
-			AddPickUpsToCorner2(*x, *y, pickupIndex, texture);
+			*(pTiles + tileIndex) = Tile(sf::Vector2f(x, y), corner2, tileType);
 			break;
 		case Tile::TileType::Corner3:
-			*(pTiles + *tileIndex) = Tile(sf::Vector2f(*x, *y), corner3, tileType);
-			AddPickUpsToCorner3(*x, *y, pickupIndex, texture);
+			*(pTiles + tileIndex) = Tile(sf::Vector2f(x, y), corner3, tileType);
 			break;
 		case Tile::TileType::Corner4:
-			*(pTiles + *tileIndex) = Tile(sf::Vector2f(*x, *y), corner4, tileType);
-			AddPickUpsToCorner4(*x, *y, pickupIndex, texture);
+			*(pTiles + tileIndex) = Tile(sf::Vector2f(x, y), corner4, tileType);
 			break;
 		case Tile::TileType::Threeway1:
-			*(pTiles + *tileIndex) = Tile(sf::Vector2f(*x, *y), threeway1, tileType);
-			AddPickUpsToThreeway1(*x, *y, pickupIndex, texture);
+			*(pTiles + tileIndex) = Tile(sf::Vector2f(x, y), threeway1, tileType);
 			break;
 		case Tile::TileType::Threeway2:
-			*(pTiles + *tileIndex) = Tile(sf::Vector2f(*x, *y), threeway2, tileType);
-			AddPickUpsToThreeway2(*x, *y, pickupIndex, texture);
+			*(pTiles + tileIndex) = Tile(sf::Vector2f(x, y), threeway2, tileType);
 			break;
 		case Tile::TileType::Threeway3:
-			*(pTiles + *tileIndex) = Tile(sf::Vector2f(*x, *y), threeway3, tileType);
-			AddPickUpsToThreeway3(*x, *y, pickupIndex, texture);
+			*(pTiles + tileIndex) = Tile(sf::Vector2f(x, y), threeway3, tileType);
 			break;
 		case Tile::TileType::Threeway4:
-			*(pTiles + *tileIndex) = Tile(sf::Vector2f(*x, *y), threeway4, tileType);
-			AddPickUpsToThreeway4(*x, *y, pickupIndex, texture);
+			*(pTiles + tileIndex) = Tile(sf::Vector2f(x, y), threeway4, tileType);
 			break;
 		case Tile::TileType::Intercross:
-			*(pTiles + *tileIndex) = Tile(sf::Vector2f(*x, *y), intercross, tileType);
-			//AddPickUpsToIntercross(*x, *y, pickupIndex, texture);
+			*(pTiles + tileIndex) = Tile(sf::Vector2f(x, y), intercross, tileType);
 			break;
 		default:
 			break;
 		}
+}
+
+int Level::CreatePickupsForTile(Tile::TileType tileType, int x, int y, int pickupIndex)
+{
+	switch (tileType)
+	{
+	case Tile::TileType::Deadend1:
+	case Tile::TileType::Deadend2:
+	case Tile::TileType::Deadend3:
+	case Tile::TileType::Deadend4:
+		return 0;
+		break;
+	case Tile::TileType::Path1:
+		return AddPickUpsToPath1(x, y, pickupIndex, texture);
+		break;
+	case Tile::TileType::Path2:
+		return AddPickUpsToPath2(x, y, pickupIndex, texture);
+		break;
+	case Tile::TileType::Corner1:
+		return AddPickUpsToCorner1(x, y, pickupIndex, texture);
+		break;
+	case Tile::TileType::Corner2:
+		return AddPickUpsToCorner2(x, y, pickupIndex, texture);
+		break;
+	case Tile::TileType::Corner3:
+		return AddPickUpsToCorner3(x, y, pickupIndex, texture);
+		break;
+	case Tile::TileType::Corner4:
+		return AddPickUpsToCorner4(x, y, pickupIndex, texture);
+		break;
+	case Tile::TileType::Threeway1:
+		return AddPickUpsToThreeway1(x, y, pickupIndex, texture);
+		break;
+	case Tile::TileType::Threeway2:
+		return AddPickUpsToThreeway2(x, y, pickupIndex, texture);
+		break;
+	case Tile::TileType::Threeway3:
+		return AddPickUpsToThreeway3(x, y, pickupIndex, texture);
+		break;
+	case Tile::TileType::Threeway4:
+		return AddPickUpsToThreeway4(x, y, pickupIndex, texture);
+		break;
+	case Tile::TileType::Intercross:
+		//return AddPickUpsToIntercross(*x, *y, pickupIndex, texture);
+		return 0;
+		break;
+	default:
+		return 0;
+		break;
+	}
+}
+
+void Level::Split(const string & s, char delim, vector<string>& elems)
+{
+	stringstream ss(s);
+	string item;
+	while (getline(ss, item, delim))
+	{
+		elems.push_back(item);
+	}
+}
+
+vector<string> Level::Split(const string & s, char delim)
+{
+	vector<string> elems;
+	Split(s, delim, elems);
+	return elems;
 }
