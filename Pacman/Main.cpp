@@ -9,6 +9,7 @@
 #include "Character.h"
 #include "Level.h"
 #include "HUD.h"
+#include "Ghost.h"
 
 // This is the main C++ program- Duh!
 // It is where our game starts from
@@ -17,9 +18,10 @@ int main()
 	// Make a window that is 800 by 200 pixels
 	sf::RenderWindow window(sf::VideoMode(800, 800), "Pacman");
 
-	Level level = Level();
-	Character character = Character();
-
+	TextureManager textureManager = TextureManager();
+	Level level = Level(textureManager);
+	Character character = Character(textureManager.GetLevelTexture("Textures/spriteAtlas.png"));
+	Ghost ghost = Ghost(textureManager.GetLevelTexture("Textures/spriteAtlas.png"));
 	HUD hud = HUD();
 
 	sf::Clock frameClock;
@@ -57,6 +59,7 @@ int main()
 		level.Draw(window);
 		character.Draw(window);
 		hud.Draw(window);
+		ghost.Draw(window);
 
 
 		// Show everything we just drew
@@ -79,7 +82,13 @@ int main()
 		bool collided = level.CheckCollision(character.GetSprite(), character.GetDirection());
 
 		character.Update(collided, frameTime);
+		ghost.Update(collided, frameTime);
 	}
+
+	//textureManager.~TextureManager();
+	level.~Level();
+	character.~Character();
+	//hud.~HUD();
 
 	return 0;
 }

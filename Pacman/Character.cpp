@@ -1,41 +1,28 @@
 #include "stdafx.h"
 #include "Character.h"
 
-Character::Character()
+Character::Character(sf::Texture & texture)
 {
-	//if (!pacman.loadFromFile("Textures/pacman.png"))
-		//std::cout << "ERROR";
-
-	//sprite.setTexture(pacman);
-
 	direction = { 1, 0 };
 	speed = 0.04f;
 
-	//Set up animation
-	// load texture (spritesheet)
-	sf::Texture * texture = new sf::Texture();
-	if (!texture->loadFromFile("Textures/spriteAtlas.png"))
-	{
-		std::cout << "Failed to load player spritesheet!" << std::endl;
-	}
-
 	// set up the animations for all four directions (set spritesheet and push frames)
-	walkingAnimationRight.setSpriteSheet(*texture);
+	walkingAnimationRight.setSpriteSheet(texture);
 	walkingAnimationRight.addFrame(sf::IntRect(799, 0, 43, 43));
 	walkingAnimationRight.addFrame(sf::IntRect(799, 47, 43, 43));
 	walkingAnimationRight.addFrame(sf::IntRect(799, 94, 43, 43));
 
-	walkingAnimationDown.setSpriteSheet(*texture);
+	walkingAnimationDown.setSpriteSheet(texture);
 	walkingAnimationDown.addFrame(sf::IntRect(799, 144, 43, 43));
 	walkingAnimationDown.addFrame(sf::IntRect(799, 191, 43, 43));
 	walkingAnimationDown.addFrame(sf::IntRect(799, 238, 43, 43));
 
-	walkingAnimationLeft.setSpriteSheet(*texture);
+	walkingAnimationLeft.setSpriteSheet(texture);
 	walkingAnimationLeft.addFrame(sf::IntRect(799, 282, 43, 43));
 	walkingAnimationLeft.addFrame(sf::IntRect(799, 329, 43, 43));
 	walkingAnimationLeft.addFrame(sf::IntRect(799, 376, 43, 43));
 
-	walkingAnimationUp.setSpriteSheet(*texture);
+	walkingAnimationUp.setSpriteSheet(texture);
 	walkingAnimationUp.addFrame(sf::IntRect(799, 425, 43, 43));
 	walkingAnimationUp.addFrame(sf::IntRect(799, 472, 43, 43));
 	walkingAnimationUp.addFrame(sf::IntRect(799, 519, 43, 43));
@@ -57,7 +44,6 @@ Character::Character()
 
 Character::~Character()
 {
-	pacman.~Texture();
 }
 
 void Character::Draw(sf::RenderWindow & window)

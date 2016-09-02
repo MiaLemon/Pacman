@@ -6,21 +6,14 @@
 #include "Animation.h"
 #include "AnimatedSprite.h"
 
-class Character
+class Ghost
 {
 public:
-	Character(sf::Texture & texture);
-	~Character();
+	Ghost(sf::Texture & texture);
+	~Ghost();
+
 	void Draw(sf::RenderWindow & window);
 	void Update(bool collided, sf::Time frameTime);
-
-	void ChangeDirectionUp();
-	void ChangeDirectionDown();
-	void ChangeDirectionRight();
-	void ChangeDirectionLeft();
-
-	AnimatedSprite GetSprite();
-	sf::Vector2f GetDirection();
 
 private:
 	AnimatedSprite sprite;

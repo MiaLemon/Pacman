@@ -13,8 +13,6 @@ HUD::HUD()
 	textPoints.setFont(font);
 	textPoints.setString("Points  0");
 	textPoints.setCharacterSize(24);
-	//textPoints.setColor(sf::Color::White);
-	//textPoints.setStyle(sf::Text::Bold | sf::Text::Underlined);
 	textPoints.setPosition(sf::Vector2f(60, 20));
 }
 
